@@ -2,6 +2,3 @@ GET     /                           controllers.HomeController.index
 
 GET     /star                       controllers.StarController.get
 GET     /stars                      controllers.StarController.list(page: Int = 0)
-
-
-      
