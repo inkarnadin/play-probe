@@ -13,7 +13,9 @@ case class Star(id: Option[Long] = None,
                 name: String,
                 visualBrightness: Option[Double],
                 absoluteMagnitude: Option[Double],
-                metallicity: Option[Double])
+                radius: Option[Double],
+                weight: Option[Double],
+                temperature: Option[Double])
 
 object Star {
   implicit def toParameters: ToParameterList[Star] =
@@ -35,9 +37,11 @@ class StarRepository @Inject() (dbapi: DBApi) (implicit dec: DatabaseExecutionCo
       get[String]("star.name") ~
       get[Option[Double]]("star.visual_brightness") ~
       get[Option[Double]]("star.absolute_magnitude") ~
-      get[Option[Double]]("star.metallicity") map {
-      case id ~ name ~ visualBrightness ~ absoluteMagnitude ~ metallicity =>
-        Star(id, name, visualBrightness, absoluteMagnitude, metallicity)
+      get[Option[Double]]("star.radius") ~
+      get[Option[Double]]("star.weight") ~
+      get[Option[Double]]("star.temperature") map {
+      case id ~ name ~ visualBrightness ~ absoluteMagnitude ~ radius ~ weight ~ temperature =>
+        Star(id, name, visualBrightness, absoluteMagnitude, radius, weight, temperature)
     }
   }
 
