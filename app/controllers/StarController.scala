@@ -7,6 +7,9 @@ import javax.inject.Inject
 
 import scala.concurrent.ExecutionContext
 
+import play.api.data.Form
+
+
 @Singleton
 class StarController @Inject() (starService: StarRepository,
                                 cc: ControllerComponents) (implicit ec: ExecutionContext) extends AbstractController(cc) {
@@ -17,7 +20,7 @@ class StarController @Inject() (starService: StarRepository,
 
   def list(page: Int) = Action.async { implicit request =>
     starService.findAll(page = page).map { page =>
-      Ok(page.items.toString())
+      Ok(page.items.foreach { f => f.name })
     }
   }
 

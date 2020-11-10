@@ -1,0 +1,16 @@
+@import repository.Star
+@import repository.Page
+
+@(currentPage: Page[Star])
+
+@main {
+    </div>
+
+    @Option(currentPage.items).map { star =>
+      <table></table>
+    }.getOrElse {
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>
+    }
+}
